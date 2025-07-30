@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>[DA] Quadro de Advertências</title>
+   <link rel="icon" href="https://i.imgur.com/m4P8I8R.gif" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(45deg, #181818 15%, #004688 50%, #181818 75%);
+      background-size: 200% 200%;
+      background-attachment: fixed;
+      animation: gradientAnimation 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+ body::after {
+            content: "";
+            position: fixed;
+            bottom: 0;
+            right: -400px;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/T9Bj79H.png');
+            background-repeat: no-repeat;
+            background-position: right bottom;
+            background-size: contain;
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+    h2 {
+      color: #fff;
+      margin: 40px 0 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 900px;
+    }
+    .card {
+      background: #fff;
+      color: #004688;
+      border-radius: 15px;
+      padding: 10px;
+       width: 130px;
+       height: 130px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: all .3s ease;
+      filter: grayscale(100%);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+    }
+    .card:hover, .card.active {
+      filter: grayscale(0%);
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.45);
+    }
+    .card img {
+      max-width: 70px;
+      max-height: 70px;
+      object-fit: contain;
+      pointer-events: none; 
+    }
+    .form-container {
+      display: none;
+      margin-top: 30px;
+      padding: 30px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      width: 90%;
+      max-width: 550px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.5s ease;
+    }
+    .form-container.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .form-container h3 {
+      margin-bottom: 20px;
+      color: #1e2a4d;
+      text-align: center;
+      font-size: 20px;
+        text-transform: uppercase;
+    }
+.form-container textarea {
+      width: 100%;
+      height: 30px;
+      border: none;
+      background: #f2f2f2;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 15px;
+      color: #282828;
+      transition: all .3s ease;
+      font-family: "Poppins", sans-serif;
+    }
+
+
+    .form-container input{
+      width: 100%;
+      height: 30px;
+      border: none;
+      background: #f2f2f2;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 15px;
+      color: #282828;
+      transition: all .3s ease;
+      font-family: "Poppins", sans-serif;
+    }
+    .form-container input:focus,
+    .form-container textarea:focus {
+      border-color: #004688;
+      background: #fff;
+      outline: none;
+      box-shadow: 0 0 6px rgba(199,165,101,0.6);
+    }
+    .form-container input::placeholder,
+    .form-container textarea::placeholder {
+      color: #6c6c6c;
+      font-style: italic;
+    }
+    .form-container textarea {
+      min-height: 60px;
+      max-height: 120px;
+      resize: vertical;
+      overflow-y: auto;
+    }
+    .form-container button {
+      margin-top: 20px;
+      padding: 15px;
+      background: linear-gradient(135deg, #004688, #013261);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+      width: 100%;
+    }
+    .form-container button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.35);
+    }
+
+ ::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #003464;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #004688;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #003464;
+      }
+
+      body {
+        scrollbar-width: thin;
+        scrollbar-color: #004688 #003464;
+      }
+
+       .creditos {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px;
+        border-top: 1px solid #004688;
+        font-size: 14px;
+        color: #ffffffc8;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease;
+      }
+
+      .creditos p strong {
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .creditos i {
+        margin-right: 8px;
+      }
+
+      .creditos .line-break {
+        display: block;
+        margin-top: -10px;
+      }
+
+      .creditos.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+  </style>
+</head>
+<body>
+
+  <h2>Escolha uma ação:</h2>
+  <div class="container">
+    <div class="card" data-type="notificacao">
+      <img src="https://i.imgur.com/57aLxAh.png" alt="notificacao" />
+      NOTIFICAÇÃO
+    </div>
+    <div class="card" data-type="advertencia">
+      <img src="https://i.imgur.com/DDp7abH.png" alt="Advertência" />
+     ADVERTÊNCIA
+    </div>
+    <div class="card" data-type="atualizacao">
+      <img src="https://i.imgur.com/428Hx6V.png" alt="Atualização" />
+     ATUALIZAÇÃO
+    </div>
+  </div>
+
+  <div class="form-container" id="form-area">
+    <h3 id="form-title"></h3>
+    <form id="mainForm">
+      <div id="form-fields"></div>
+      <input type="hidden" class="data_hour" id="data" name="data" />
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+        <div class="creditos">
+        <p>
+          <i class="fas fa-code"></i> Desenvolvido por:
+          <strong>i,t</strong>
+        </p>
+        <p class="line-break">
+          <i class="far fa-registered"></i> Todos os direitos reservados à
+          <strong>companhia dos Instrutores (DA).</strong>
+        </p>
+      </div>
+    </div>
+
+  <script>
+  function retorna_horario() {
+    const horario = new Date();
+    horario.setMinutes(horario.getMinutes() + horario.getTimezoneOffset() - 180);
+
+    let dia = horario.getDate();
+    if (dia < 10) dia = "0" + dia;
+
+    const meses = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+    const mes = meses[horario.getMonth()];
+    const ano = horario.getFullYear();
+
+    return `${dia} ${mes}. ${ano}`;
+  }
+
+  document.querySelectorAll(".data_hour").forEach((element) => {
+    element.value = retorna_horario();
+  });
+
+  $(".container").on("click", ".card", function() {
+    $(".card").removeClass("active");
+    $(this).addClass("active");
+
+    const card = $(this);
+    const type = card.data("type");
+    const title = $("#form-title");
+    const fields = $("#form-fields");
+
+    $("#form-area").addClass("active");
+    fields.empty();
+
+    if (type === "advertencia" || type === "notificacao") {
+      title.text(type === "advertencia" ? "ADVERTÊNCIA" : "NOTIFICAÇÃO");
+      fields.append(`
+        <input type="text" id="nick" placeholder="Nickname do infrator" required />
+        <input type="text" id="motivo" placeholder="Motivo" required />
+        <input type="text" id="comprovacao" placeholder="Comprovação (links, prints, etc.)" required />
+      `);
+    } else if (type === "atualizacao") {
+      title.text("Atualização");
+      fields.append(`<input type="text" id="tag" placeholder="Ex: itt" required />`);
+    }
+
+    $("#mainForm").off("submit").on("submit", function(e) {
+      e.preventDefault();
+
+      let message = "";
+      const data = $("#data").val();
+
+      if (type === "advertencia" || type === "notificacao") {
+        const nick = $("#nick").val();
+        const motivo = $("#motivo").val();
+        const comprovacao = $("#comprovacao").val();
+
+        message = `[center][font=Poppins][b][color=#1e2a4d]POSTAGEM DE ${title.text()}[/color][/b][/center]
+
+[b]Nickname do infrator:[/b] ${nick}
+[b]Punição:[/b] ${title.text()}
+[b]Motivo:[/b] ${motivo}
+[b]Comprovação:[/b] ${comprovacao}
+[b]Data:[/b] ${data}[/font]`;
+
+fetch("https://script.google.com/macros/s/AKfycbzAMZ1kcPaPEj3ecft1784J_OkqWGN0o_3xYHLSxwtnrkSii80oAw7EmRq3R5BkxY5B/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body: new URLSearchParams({
+    tipo: type,
+    nick: nick,
+    motivo: motivo,
+    comprovacao: comprovacao,
+    data: data
+  })
+})
+.then(r => r.text())
+.then(resp => console.log("Planilha:", resp))
+.catch(err => console.error("Erro:", err));
+
+
+      } else if (type === "atualizacao") {
+        const attlist_tag_value = $("#tag").val();
+        message = `[color=#0C3F8B][b][/b][/color] 
+[table class="rank" style="border: none!important; margin: 2em; line-height: 1em;" bgcolor="#006ECE"]
+[tr style="border: none;"][td style="tr style="][color=white]
+[img(48px,50px)]https://www.habbo.com.br/habbo-imaging/badge/b09154s43067s50134s81113s781156bff48af5c0e3a7903f4945ddffa5d34.gif[/img]
+
+[font=poppins][size=15][b][DA] Atualização realizada! [${attlist_tag_value}][/b][/size][/font]
+
+[font=poppins]Foi realizada uma atualização neste horário, em caso de erros, consulte um membro da Liderança do Departamento de Aplicação.[/font][/color][/td][/tr][/table]`;
+      }
+
+      $.post("/post", {
+        t: 38978, // ID do tópico
+        message: message,
+        mode: "reply",
+        post: 1
+      })
+      .done(() => {
+        alert("Postado com sucesso! Redirecionando...");
+        location.href = "http://" + location.host + "/t38978-?view=newest";
+      })
+      .fail(() => {
+        alert("Erro ao postar! Tente novamente.");
+      });
+    });
+  });
+
+  window.addEventListener("load", () => {
+    document.querySelector(".creditos").classList.add("show");
+  });
+</script>
+
+
+</body>
+</html>
